@@ -1,0 +1,134 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.kycaid.com/applicants
+    body:
+      encoding: UTF-8
+      string: dob=1986-05-03&email=john_baker%40gmail.com&first_name=John&last_name=Baker&residence_country=GB&sandbox=true&type=PERSON
+    headers:
+      User-Agent:
+      - Faraday v1.0.1
+      Authorization:
+      - Token d9883415047de3439328df17b0310569669a
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '55'
+      Etag:
+      - W/"37-qzHK7p1b3dLZqqmGg1fY7Rw/POY"
+      Date:
+      - Sun, 24 May 2020 12:54:42 GMT
+      Via:
+      - 1.1 google
+      Alt-Svc:
+      - clear
+    body:
+      encoding: UTF-8
+      string: '{"applicant_id":"72610deb0d62c54f9c2a0574ca7c1d27e1f8"}'
+    http_version: null
+  recorded_at: Sun, 24 May 2020 12:54:42 GMT
+- request:
+    method: post
+    uri: https://api.kycaid.com/applicants
+    body:
+      encoding: UTF-8
+      string: dob=1986-05-03&email=john_baker%40gmail.com&last_name=Baker&residence_country=GB&sandbox=true&type=PERSON
+    headers:
+      User-Agent:
+      - Faraday v1.0.1
+      Authorization:
+      - Token d9883415047de3439328df17b0310569669a
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 422
+      message: Unprocessable Entity
+    headers:
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '94'
+      Etag:
+      - W/"5e-55vJODf/JXnHRAymuQAeEqE9dl8"
+      Date:
+      - Sun, 24 May 2020 12:54:42 GMT
+      Via:
+      - 1.1 google
+      Alt-Svc:
+      - clear
+    body:
+      encoding: UTF-8
+      string: '{"type":"validation","errors":[{"parameter":"first_name","message":"First
+        name is required"}]}'
+    http_version: null
+  recorded_at: Sun, 24 May 2020 12:54:42 GMT
+- request:
+    method: post
+    uri: https://api.kycaid.com/applicants
+    body:
+      encoding: UTF-8
+      string: sandbox=true
+    headers:
+      User-Agent:
+      - Faraday v1.0.1
+      Authorization:
+      - Token d9883415047de3439328df17b0310569669a
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 422
+      message: Unprocessable Entity
+    headers:
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '96'
+      Etag:
+      - W/"60-mMiFAU8TUlADfEgp8fNp3Z3uSVk"
+      Date:
+      - Sun, 24 May 2020 12:54:42 GMT
+      Via:
+      - 1.1 google
+      Alt-Svc:
+      - clear
+    body:
+      encoding: UTF-8
+      string: '{"type":"validation","errors":[{"parameter":"type","message":"Type
+        of applicant is not valid"}]}'
+    http_version: null
+  recorded_at: Sun, 24 May 2020 12:54:42 GMT
+recorded_with: VCR 5.1.0

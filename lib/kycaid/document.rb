@@ -31,5 +31,5 @@ module KYCAID
       super(response)
       self.raw_response = response
     end
-	end
+  end
 end
