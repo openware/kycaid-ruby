@@ -1,7 +1,6 @@
 require "faraday"
 require "json"
 require "ostruct"
-require "active_support"
 
 require "kycaid/version"
 require "kycaid/configuration"
