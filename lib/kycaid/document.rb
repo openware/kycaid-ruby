@@ -13,9 +13,9 @@ module KYCAID
       new(JSON.parse(response.body))
     end
 
-    def self.patch(applicant_id)
-      protected_params = params.slice(:document_id, :applicant_id, :type, :document_number, :issue_date, :expiry_date, :front_side_id, :back_side_id)
-      response = get("/documents/#{document_id}", protected_params)
+    def self.update(params)
+      protected_params = params.slice(:type, :document_number, :issue_date, :expiry_date, :front_side_id, :back_side_id)
+      response = patch("/documents/#{params[:id]}", protected_params)
       new(JSON.parse(response.body))
     end
 

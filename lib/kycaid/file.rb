@@ -8,7 +8,7 @@ module KYCAID
     end
 
     def self.update(params)
-      response = file_put("/files/#{params[:file_id]}", params.slice(:file, file_id).merge(sandbox: KYCAID.configuration.sandbox_mode))
+      response = file_put("/files/#{params[:file_id]}", params.slice(:tempfile, :content_type, :original_filename).merge(sandbox: KYCAID.configuration.sandbox_mode))
       new(JSON.parse(response.body))
     end
 
