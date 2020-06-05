@@ -33,7 +33,6 @@ RSpec.describe KYCAID::File do
         tempfile: temp_file,
         content_type: content_type,
         original_filename: original_filename,
-        sandbox: true,
       }) { empty_response }
 
       subject.update(params)
