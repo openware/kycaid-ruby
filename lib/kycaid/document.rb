@@ -1,22 +1,31 @@
 module KYCAID
-  class Document < OpenStruct
+  class Document < Response
     extend Client
 
     def self.create(params)
-      front_file_id = file_params(params[:front_file]) unless params[:front_file].nil?
-      back_file_id = file_params(params[:back_file]) unless params[:back_file].nil?
+      front_file_id = unless params[:front_file].nil?
+        front_file = file_params(params[:front_file])
+        return front_file unless front_file.errors.nil?
+
+        front_file.file_id
+      end
+
+      back_file_id = unless params[:back_file].nil?
+        back_file = file_params(params[:back_file])
+        return back_file unless back_file.errors.nil?
+
+        back_file.file_id
+      end
 
       protected_params = params.slice(:applicant_id, :type, :document_number, :issue_date, :expiry_date)
                                .merge(front_side_id: front_file_id, back_side_id: back_file_id)
 
-      response = post("/documents", protected_params.compact)
-      new(JSON.parse(response.body))
+      respond(post("/documents", protected_params.compact))
     end
 
     def self.update(params)
       protected_params = params.slice(:type, :document_number, :issue_date, :expiry_date, :front_side_id, :back_side_id)
-      response = patch("/documents/#{params[:id]}", protected_params)
-      new(JSON.parse(response.body))
+      respond(patch("/documents/#{params[:id]}", protected_params))
     end
 
     def self.file_params(params)
@@ -24,12 +33,7 @@ module KYCAID
         tempfile: params[:tempfile],
         content_type: "image/#{params[:file_extension]}",
         original_filename: params[:file_name]
-      ).file_id
-    end
-
-    def initialize(response)
-      super(response)
-      self.raw_response = response
+      )
     end
   end
 end

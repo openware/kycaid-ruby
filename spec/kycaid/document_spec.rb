@@ -29,11 +29,8 @@ RSpec.describe KYCAID::Document do
 
   context 'create' do
     it 'posts two files and a document' do
-      allow(KYCAID::File).to receive(:file_post).with('/files', {
-        tempfile: temp_file,
-        content_type: "image/jpg",
-        original_filename: original_filename
-      }) { OpenStruct.new(body: '{"file_id": 3}') }
+      WebMock.stub_request(:post, "https://api.kycaid.com/files").
+        to_return(status: 200, body: '{"file_id": 3}', headers: {})
 
       allow(subject).to receive(:post).with('/documents', {
         applicant_id: "someID",
@@ -46,6 +43,15 @@ RSpec.describe KYCAID::Document do
       })  { OpenStruct.new(body: '{}') }
       
       subject.create(params)
+    end
+
+
+    it 'creating file failed' do
+      WebMock.stub_request(:post, "https://api.kycaid.com/files").
+        to_return(status: 403, body: '{}', headers: {})
+
+      res = subject.create(params)
+      expect(res.errors).not_to be_nil
     end
   end
 

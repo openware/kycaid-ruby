@@ -5,6 +5,7 @@ require "ostruct"
 require "kycaid/version"
 require "kycaid/configuration"
 require "kycaid/client"
+require "kycaid/response"
 require "kycaid/applicant"
 require "kycaid/file"
 require "kycaid/document"
@@ -13,6 +14,7 @@ require "kycaid/verification"
 
 module KYCAID
   class Error < StandardError; end
+  class Unauthorized < Error; end
 
   class << self
     attr_accessor :configuration

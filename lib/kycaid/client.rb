@@ -15,16 +15,20 @@ module KYCAID
       end
     end
 
+    def sandbox?
+      KYCAID.configuration.sandbox_mode
+    end
+
     def get(url, options={})
-      conn.get(url, options.merge(sandbox: KYCAID.configuration.sandbox_mode))
+      conn.get(url, options.merge(sandbox: sandbox?))
     end
 
     def post(url, params={})
-      conn.post(url, params.merge(sandbox: KYCAID.configuration.sandbox_mode))
+      conn.post(url, params.merge(sandbox: sandbox?))
     end
 
     def patch(url, params={})
-      conn.patch(url, params.merge(sandbox: KYCAID.configuration.sandbox_mode))
+      conn.patch(url, params.merge(sandbox: sandbox?))
     end
 
     def file_post(url, params={})
@@ -41,7 +45,7 @@ module KYCAID
         params[:content_type],
         params[:original_filename]
       )
-      payload = { :file => file }.merge(sandbox: KYCAID.configuration.sandbox_mode)
+      payload = { :file => file }.merge(sandbox: sandbox?)
       payload
     end
   end

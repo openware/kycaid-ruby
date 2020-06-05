@@ -1,21 +1,14 @@
 module KYCAID
-  class Verification < OpenStruct
+  class Verification < Response
     extend Client
 
     def self.create(params)
       protected_params = params.slice(:applicant_id, :types, :callback_url)
-      response = post("/verifications", protected_params)
-      new(JSON.parse(response.body))
+      respond(post("/verifications", protected_params))
     end
 
     def self.fetch(verification_id)
-      response = get("/verifications/#{verification_id}")
-      new(JSON.parse(response.body))
-    end
-
-    def initialize(response)
-      super(response)
-      self.raw_response = response
+      respond(get("/verifications/#{verification_id}"))
     end
   end
 end
