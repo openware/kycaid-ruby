@@ -21,9 +21,6 @@ steps:
       - chmod 0600 ~/.gem/credentials
       - gem build kycaid.gemspec
       - gem push kycaid*.gem
-    when:
-      branch:
-        - master
 
 trigger:
   event:
