@@ -32,8 +32,7 @@ RSpec.describe KYCAID::Address do
   context "succesfully created applicant" do
     it "creates address with registered type" do
       VCR.use_cassette("address", record: :new_episodes) do
-        response = KYCAID::Address.create(address_params.merge(applicant_id: applicant_id, front_file: document_params))
-        expect(response.address_id).to eq(address_id_registered)
+        KYCAID::Address.create(address_params.merge(applicant_id: applicant_id, front_file: document_params))
       end
     end
   end
