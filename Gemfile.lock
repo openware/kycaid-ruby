@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    kycaid (1.0.0)
+    kycaid (1.0.1)
       faraday
       json
 
@@ -15,8 +15,15 @@ GEM
       safe_yaml (~> 1.0.0)
     diff-lcs (1.3)
     docile (1.3.2)
-    faraday (1.0.1)
+    faraday (1.4.1)
+      faraday-excon (~> 1.1)
+      faraday-net_http (~> 1.0)
+      faraday-net_http_persistent (~> 1.1)
       multipart-post (>= 1.2, < 3)
+      ruby2_keywords (>= 0.0.4)
+    faraday-excon (1.1.0)
+    faraday-net_http (1.0.1)
+    faraday-net_http_persistent (1.1.0)
     hashdiff (1.0.1)
     json (2.3.0)
     method_source (1.0.0)
@@ -39,6 +46,7 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.9.0)
     rspec-support (3.9.2)
+    ruby2_keywords (0.0.4)
     safe_yaml (1.0.5)
     simplecov (0.17.1)
       docile (~> 1.1)

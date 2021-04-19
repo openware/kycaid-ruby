@@ -23,7 +23,7 @@ RSpec.describe KYCAID::Document do
       type: 'docType',
       document_number: 'numb',
       issue_date: 'date',
-      expiry_date: 'date too',    
+      expiry_date: 'date too',
     }
   end
 
@@ -41,14 +41,18 @@ RSpec.describe KYCAID::Document do
         issue_date: "date",
         type: "docType",
       })  { OpenStruct.new(body: '{}') }
-      
+
       subject.create(params)
     end
 
 
     it 'creating file failed' do
-      WebMock.stub_request(:post, "https://api.kycaid.com/files").
-        to_return(status: 403, body: '{}', headers: {})
+      WebMock.stub_request(:post, "https://api.kycaid.com/files")
+             .to_return(status: 403, body: '{}', headers: {})
+
+      WebMock.stub_request(:post, "https://api.kycaid.com/documents")
+             .to_return(status: 403, body: '{}', headers: {})
+
 
       res = subject.create(params)
       expect(res.errors).not_to be_nil
@@ -57,13 +61,18 @@ RSpec.describe KYCAID::Document do
 
   context 'update' do
     it 'patches a document by id' do
+      WebMock.stub_request(:post, "https://api.kycaid.com/files").
+              to_return(status: 200, body: '{"file_id": 3}', headers: {})
+
       allow(subject).to receive(:patch).with('/documents/67', {
+        back_side_id: 3,
         document_number: "numb",
         expiry_date: "date too",
+        front_side_id: 3,
         issue_date: "date",
         type: "docType",
       })  { OpenStruct.new(body: '{}') }
-      
+
       subject.update(params)
     end
   end
